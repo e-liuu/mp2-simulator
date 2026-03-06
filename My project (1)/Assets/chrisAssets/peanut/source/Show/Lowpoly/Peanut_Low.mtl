@@ -1,0 +1,13 @@
+# Blender 3.3.1 MTL File: 'Peanut.blend'
+# www.blender.org
+
+newmtl Peanut_Low
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Ks Texture/Peanut_Low_Specular.jpg
+map_Ns Texture/Peanut_Low_Roughness.jpg
+map_Bump -bm 1.000000 Texture/Peanut_Low_Normal.jpg
