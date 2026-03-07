@@ -3,7 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class UnlockWaterButton : MonoBehaviour
 {
-    public float cost = 10f;
+    public float cost = 300f;
     public HUDManager hudManager;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;

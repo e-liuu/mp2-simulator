@@ -501,7 +501,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FertilizerSpawner
   fertilizerPrefab: {fileID: 340687934}
-  spawnInterval: 80
+  minSpawnTime: 30
+  maxSpawnTime: 90
 --- !u!4 &217941283
 Transform:
   m_ObjectHideFlags: 0
@@ -2604,7 +2605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Spend 500 Sunlight to unlock
+  m_text: 'Spend 300 Sunlight to unlock
 
 '
   m_isRightToLeft: 0
