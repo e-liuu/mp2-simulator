@@ -5,6 +5,7 @@ public class UnlockWaterButton : MonoBehaviour
 {
     public float cost = 300f;
     public HUDManager hudManager;
+    public AudioClip unlockSound;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
 
@@ -27,13 +28,18 @@ public class UnlockWaterButton : MonoBehaviour
             rm.waterUnlocked = true;
             rm.waterBaseRate = 0.5f;
             hudManager.UnlockWaterUI();
-            gameObject.SetActive(false);
 
             GameObject[] walls = GameObject.FindGameObjectsWithTag("wall");
             foreach (GameObject wall in walls)
             {
+                // Play spatialized shatter sound at each wall's position
+                if (unlockSound != null)
+                    AudioSource.PlayClipAtPoint(unlockSound, wall.transform.position);
+
                 wall.SetActive(false);
             }
+
+            gameObject.SetActive(false);
         }
         else
         {

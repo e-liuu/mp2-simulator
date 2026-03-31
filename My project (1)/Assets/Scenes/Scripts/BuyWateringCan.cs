@@ -51,14 +51,19 @@ public class BuyWateringCan : MonoBehaviour
 
             purchased = true;
 
+            // Haptic feedback on the purchasing controller
+            var interactorMono = args.interactorObject as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                var haptic = interactorMono.GetComponent<UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer>();
+                if (haptic != null)
+                    haptic.SendHapticImpulse(0.8f, 0.4f);
+            }
+
             // Disable interaction (no more purchases)
             interactable.enabled = false;
 
             Debug.Log("Watering can purchased! Sun production boosted.");
-            // if (window != null)
-            // {
-            //     window.SetActive(false);
-            // }
             window.transform.position = new Vector3(0, -8f, 0);
         }
         else

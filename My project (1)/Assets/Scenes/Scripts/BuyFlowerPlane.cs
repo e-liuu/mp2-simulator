@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using System.Collections;
 
 public class BuyFlowerPlane : MonoBehaviour
 {
@@ -52,13 +53,26 @@ public class BuyFlowerPlane : MonoBehaviour
         if (rm.SpendSunlight(cost))
         {
             Vector3 newpos = new Vector3(transform.position.x, 0.28f, transform.position.z);
-            Instantiate(sunflowerPrefab, newpos, Quaternion.identity);
-            gameObject.SetActive(false);
+            GameObject sunflower = Instantiate(sunflowerPrefab, newpos, Quaternion.identity);
+            sunflower.AddComponent<ScaleEaseIn>();
+            StartCoroutine(SinkAndHide());
         }
         else
         {
             Debug.Log("Not enough sunlight! Need: " + cost);
         }
+    }
+
+    IEnumerator SinkAndHide()
+    {
+        float speed = 6f;
+        Vector3 targetPos = transform.position + Vector3.down * 0.6f;
+        while (Vector3.Distance(transform.position, targetPos) > 0.01f)
+        {
+            transform.position += (targetPos - transform.position) * speed * Time.deltaTime;
+            yield return null;
+        }
+        gameObject.SetActive(false);
     }
 
     void OnDestroy()
