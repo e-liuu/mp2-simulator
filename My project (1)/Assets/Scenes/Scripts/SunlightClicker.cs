@@ -1,41 +1,34 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
-
+using UnityEngine.InputSystem;
+using UnityEngine.XR;
+using XRInputDevice = UnityEngine.XR.InputDevice;
 public class SunlightClicker : MonoBehaviour
 {
     public float sunlightPerClick = 1f;
     public AudioSource clickSound;
     public ParticleSystem clickParticles;
+    public InputActionReference primaryButtonAction;
 
-    private XRSimpleInteractable interactable;
+    private bool wasPressed = false;
 
-    void Start()
+    void Update()
     {
-        interactable = GetComponent<XRSimpleInteractable>();
-        interactable.selectEntered.AddListener(OnClick);
-    }
+        if (primaryButtonAction == null) return;
 
-    void OnClick(SelectEnterEventArgs args)
-    {
-        ResourceManager.Instance.sunlight += sunlightPerClick;
+        bool isPressed = primaryButtonAction.action.IsPressed();
 
-        var interactorMono = args.interactorObject as MonoBehaviour;
-        if (interactorMono != null)
+        if (isPressed && !wasPressed)
         {
-            var haptic = interactorMono.GetComponent<HapticImpulsePlayer>();
-            if (haptic != null)
-                haptic.SendHapticImpulse(0.5f, 0.1f);
+            ResourceManager.Instance.sunlight += sunlightPerClick;
+
+            if (clickSound != null) clickSound.Play();
+            if (clickParticles != null) clickParticles.Play();
+
+            // Haptics
+            XRInputDevice rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+            rightController.SendHapticImpulse(0, 0.5f, 0.1f);
         }
 
-        if (clickSound != null) clickSound.Play();
-        if (clickParticles != null) clickParticles.Play();
-    }
-
-    void OnDestroy()
-    {
-        if (interactable != null)
-            interactable.selectEntered.RemoveListener(OnClick);
+        wasPressed = isPressed;
     }
 }

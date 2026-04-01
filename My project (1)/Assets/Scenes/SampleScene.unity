@@ -2555,6 +2555,7 @@ MonoBehaviour:
   sunlightPerClick: 1
   clickSound: {fileID: 0}
   clickParticles: {fileID: 0}
+  primaryButtonAction: {fileID: 0}
 --- !u!1 &541153415
 GameObject:
   m_ObjectHideFlags: 0
@@ -28120,6 +28121,14 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210331148623012557, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: normalFOV
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210331148623012557, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: restrictedFOV
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
