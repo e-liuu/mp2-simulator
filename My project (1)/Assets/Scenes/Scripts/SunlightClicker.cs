@@ -1,23 +1,41 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class SunlightClicker : MonoBehaviour
 {
     public float sunlightPerClick = 1f;
-    public InputActionReference primaryButtonAction;
+    public AudioSource clickSound;
+    public ParticleSystem clickParticles;
 
-    private bool wasPressed = false;
+    private XRSimpleInteractable interactable;
 
-    void Update()
+    void Start()
     {
-        bool isPressed = primaryButtonAction.action.IsPressed();
+        interactable = GetComponent<XRSimpleInteractable>();
+        interactable.selectEntered.AddListener(OnClick);
+    }
 
-        if (isPressed && !wasPressed)
+    void OnClick(SelectEnterEventArgs args)
+    {
+        ResourceManager.Instance.sunlight += sunlightPerClick;
+
+        var interactorMono = args.interactorObject as MonoBehaviour;
+        if (interactorMono != null)
         {
-            ResourceManager.Instance.sunlight += sunlightPerClick;
-            Debug.Log("Pressed for sun!");
+            var haptic = interactorMono.GetComponent<HapticImpulsePlayer>();
+            if (haptic != null)
+                haptic.SendHapticImpulse(0.5f, 0.1f);
         }
 
-        wasPressed = isPressed;
+        if (clickSound != null) clickSound.Play();
+        if (clickParticles != null) clickParticles.Play();
+    }
+
+    void OnDestroy()
+    {
+        if (interactable != null)
+            interactable.selectEntered.RemoveListener(OnClick);
     }
 }
