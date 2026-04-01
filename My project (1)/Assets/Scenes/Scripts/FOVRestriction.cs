@@ -17,13 +17,19 @@ public class FOVRestriction : MonoBehaviour
         if (xrCamera == null)
             xrCamera = Camera.main;
 
-        lastPosition = xrCamera.transform.position; // track camera not rig
+        lastPosition = xrCamera.transform.position;
     }
 
     void Update()
     {
-        float speed = (xrCamera.transform.position - lastPosition).magnitude / Time.deltaTime;
-        lastPosition = xrCamera.transform.position;
+        Vector3 currentPosition = xrCamera.transform.position;
+        
+        // Only check X and Z, ignore Y (vertical)
+        Vector2 currentHorizontal = new Vector2(currentPosition.x, currentPosition.z);
+        Vector2 lastHorizontal = new Vector2(lastPosition.x, lastPosition.z);
+        
+        float speed = (currentHorizontal - lastHorizontal).magnitude / Time.deltaTime;
+        lastPosition = currentPosition;
 
         if (speed > motionThreshold)
             timeSinceMoving = 0f;

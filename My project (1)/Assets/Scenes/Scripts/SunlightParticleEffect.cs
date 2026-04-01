@@ -3,7 +3,6 @@ using UnityEngine;
 public class SunlightParticleEffect : MonoBehaviour
 {
     public ParticleSystem sunParticles;
-    public int burstAmount = 3; // particles per sunlight tick
 
     private ResourceManager rm;
     private float lastSunlight;
@@ -16,11 +15,14 @@ public class SunlightParticleEffect : MonoBehaviour
 
     void Update()
     {
-        if (rm.sunlight > lastSunlight)
+        int currentWhole = Mathf.FloorToInt(rm.sunlight);
+        int lastWhole = Mathf.FloorToInt(lastSunlight);
+
+        if (currentWhole > lastWhole)
         {
-            sunParticles.Emit(burstAmount);
+            sunParticles.Emit((currentWhole - lastWhole)/2); // exactly 1 per unit
         }
 
         lastSunlight = rm.sunlight;
-    }
+        }
 }
