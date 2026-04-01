@@ -8,6 +8,8 @@ public class BuySuperPeanut : MonoBehaviour
     public float spinSpeed = 60f;
     public GameObject peanut;
     public GameObject window;
+    public AudioClip purchaseSound;
+    public ParticleSystem purchaseParticles;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
     private bool purchased = false;
@@ -51,6 +53,15 @@ public class BuySuperPeanut : MonoBehaviour
             rm.waterMultiplier *= waterMultiplierIncrease;
 
             purchased = true;
+
+            // Ease in
+            if (peanut != null) peanut.AddComponent<ScaleEaseIn>();
+
+            // Sound
+            if (purchaseSound != null) AudioSource.PlayClipAtPoint(purchaseSound, transform.position);
+
+            // Particles
+            if (purchaseParticles != null) purchaseParticles.Play();
 
             // Haptic feedback on the purchasing controller
             var interactorMono = args.interactorObject as MonoBehaviour;

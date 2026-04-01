@@ -14,6 +14,9 @@ public class HUDManager : MonoBehaviour
     public GameObject lockOverlay;
 
     private ResourceManager resources;
+    private float lastSunlight = 0f;
+    private float lastWater = 0f;
+    private const float popThreshold = 5f;
 
     void Start()
     {
@@ -31,6 +34,28 @@ public class HUDManager : MonoBehaviour
 
         waterCountText.text = $"{resources.water:F0}";
         waterRateText.text  = $"+{resources.WaterRate:F1}/sec";
+
+        if (resources.sunlight > lastSunlight + popThreshold)
+        {
+            lastSunlight = resources.sunlight;
+            StartCoroutine(PopScale(sunlightCountText.transform));
+        }
+        if (resources.waterUnlocked && resources.water > lastWater + popThreshold)
+        {
+            lastWater = resources.water;
+            StartCoroutine(PopScale(waterCountText.transform));
+        }
+    }
+
+    private System.Collections.IEnumerator PopScale(Transform t)
+    {
+        t.localScale = Vector3.one * 1.4f;
+        while (Vector3.Distance(t.localScale, Vector3.one) > 0.01f)
+        {
+            t.localScale += (Vector3.one - t.localScale) * 10f * Time.deltaTime;
+            yield return null;
+        }
+        t.localScale = Vector3.one;
     }
 
     public void UnlockWaterUI()

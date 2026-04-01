@@ -43,6 +43,10 @@ public class BuyFlowerPlane : MonoBehaviour
         costText.text = "Buy Flower - " + cost;
     }
 
+    [Header("Juice")]
+    public AudioClip plantSound;
+    public ParticleSystem plantParticles;
+
     void OnGrabbed(SelectEnterEventArgs args)
     {
         ResourceManager rm = ResourceManager.Instance;
@@ -56,6 +60,20 @@ public class BuyFlowerPlane : MonoBehaviour
             GameObject sunflower = Instantiate(sunflowerPrefab, newpos, Quaternion.identity);
             sunflower.AddComponent<ScaleEaseIn>();
             StartCoroutine(SinkAndHide());
+
+            // Haptics
+            var interactorMono = args.interactorObject as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                var haptic = interactorMono.GetComponent<UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer>();
+                if (haptic != null) haptic.SendHapticImpulse(0.5f, 0.2f);
+            }
+
+            // Sound
+            if (plantSound != null) AudioSource.PlayClipAtPoint(plantSound, transform.position);
+
+            // Particles
+            if (plantParticles != null) plantParticles.Play();
         }
         else
         {

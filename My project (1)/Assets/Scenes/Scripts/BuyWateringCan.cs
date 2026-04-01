@@ -8,6 +8,8 @@ public class BuyWateringCan : MonoBehaviour
     public float spinSpeed = 60f;
     public GameObject can;
     public GameObject window;
+    public AudioClip purchaseSound;
+    public ParticleSystem purchaseParticles;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
     private bool purchased = false;
@@ -50,6 +52,15 @@ public class BuyWateringCan : MonoBehaviour
             rm.sunlightMultiplier *= sunMultiplierIncrease;
 
             purchased = true;
+
+            // Ease in
+            if (can != null) can.AddComponent<ScaleEaseIn>();
+
+            // Sound
+            if (purchaseSound != null) AudioSource.PlayClipAtPoint(purchaseSound, transform.position);
+
+            // Particles
+            if (purchaseParticles != null) purchaseParticles.Play();
 
             // Haptic feedback on the purchasing controller
             var interactorMono = args.interactorObject as MonoBehaviour;
