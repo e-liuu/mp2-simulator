@@ -7,6 +7,7 @@ public class FertilizerPickup : MonoBehaviour
     public float boostMultiplier = 2f;
     public float boostDuration = 10f;
     public float spinSpeed = 90f;
+    public AudioClip pickupSound;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
 
@@ -27,11 +28,12 @@ public class FertilizerPickup : MonoBehaviour
     void OnCollected(SelectEnterEventArgs args)
     {
         ResourceManager rm = ResourceManager.Instance;
-
         if (rm != null)
-        {
             StartCoroutine(TemporaryBoost(rm));
-        }
+
+        // Play sound at position before destroying
+        if (pickupSound != null)
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
 
         Destroy(gameObject);
     }
@@ -44,14 +46,10 @@ public class FertilizerPickup : MonoBehaviour
         rm.sunlightMultiplier *= boostMultiplier;
         rm.waterMultiplier *= boostMultiplier;
 
-        Debug.Log("Fertilizer collected! Sun & water boosted.");
-
         yield return new WaitForSeconds(boostDuration);
 
         rm.sunlightMultiplier = originalSun;
         rm.waterMultiplier = originalWater;
-
-        Debug.Log("Fertilizer boost ended.");
     }
 
     void OnDestroy()
