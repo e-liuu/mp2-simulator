@@ -11101,6 +11101,7 @@ GameObject:
   - component: {fileID: 309393050}
   - component: {fileID: 309393049}
   - component: {fileID: 309393048}
+  - component: {fileID: 309393051}
   m_Layer: 0
   m_Name: TrophyUnlock1 (1)
   m_TagString: Untagged
@@ -11122,7 +11123,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrophyUnlock
   trophy: {fileID: 1179051940}
   sunReq: 200
-  waterReq: 200
+  waterReq: 120
+  audioSource: {fileID: 309393051}
+  unlockSound: {fileID: 0}
+  confettiPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa, type: 3}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!114 &309393049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11138,6 +11147,14 @@ MonoBehaviour:
   trophy: {fileID: 0}
   sunReq: 0
   waterReq: 0
+  audioSource: {fileID: 0}
+  unlockSound: {fileID: 0}
+  confettiPrefab: {fileID: 0}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!4 &309393050
 Transform:
   m_ObjectHideFlags: 0
@@ -11153,6 +11170,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &309393051
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309393047}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &317077697
 GameObject:
   m_ObjectHideFlags: 0
@@ -11859,6 +11973,7 @@ GameObject:
   - component: {fileID: 377491612}
   - component: {fileID: 377491611}
   - component: {fileID: 377491610}
+  - component: {fileID: 377491613}
   m_Layer: 0
   m_Name: TrophyUnlock1 (2)
   m_TagString: Untagged
@@ -11880,7 +11995,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrophyUnlock
   trophy: {fileID: 326299870}
   sunReq: 300
-  waterReq: 300
+  waterReq: 200
+  audioSource: {fileID: 0}
+  unlockSound: {fileID: 0}
+  confettiPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa, type: 3}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!114 &377491611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11896,6 +12019,14 @@ MonoBehaviour:
   trophy: {fileID: 0}
   sunReq: 0
   waterReq: 0
+  audioSource: {fileID: 0}
+  unlockSound: {fileID: 0}
+  confettiPrefab: {fileID: 0}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!4 &377491612
 Transform:
   m_ObjectHideFlags: 0
@@ -11911,6 +12042,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &377491613
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377491609}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &396377060
 GameObject:
   m_ObjectHideFlags: 0
@@ -47086,6 +47314,7 @@ GameObject:
   - component: {fileID: 1668962493}
   - component: {fileID: 1668962492}
   - component: {fileID: 1668962491}
+  - component: {fileID: 1668962494}
   m_Layer: 0
   m_Name: TrophyUnlock1
   m_TagString: Untagged
@@ -47107,7 +47336,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrophyUnlock
   trophy: {fileID: 1566985448}
   sunReq: 100
-  waterReq: 100
+  waterReq: 50
+  audioSource: {fileID: 1668962494}
+  unlockSound: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
+  confettiPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa, type: 3}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!114 &1668962492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47123,6 +47360,14 @@ MonoBehaviour:
   trophy: {fileID: 0}
   sunReq: 0
   waterReq: 0
+  audioSource: {fileID: 0}
+  unlockSound: {fileID: 0}
+  confettiPrefab: {fileID: 0}
+  confettiSpawnPoint: {fileID: 0}
+  popupTextObject: {fileID: 0}
+  popupText: {fileID: 0}
+  message: You just won a trophy!
+  popupDuration: 2
 --- !u!4 &1668962493
 Transform:
   m_ObjectHideFlags: 0
@@ -47138,6 +47383,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1668962494
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668962490}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1697435272
 GameObject:
   m_ObjectHideFlags: 0
