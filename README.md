@@ -1,5 +1,5 @@
-# MP2
-by Eric Liu, Chris Monzon, Lucy Zhou
+# MP3
+by Eric Liu, Chris Monzon, Abhishek Ramakrishnan, Lucy Zhou
 
 ## Additional Features Implemented:
 A. Clicker: player can press right primary key to manually increment sunlight counters
