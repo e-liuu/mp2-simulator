@@ -1,12 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class UnlockWaterButton : MonoBehaviour
 {
-    public float cost = 300f;
+    public float cost = 500f;
     public HUDManager hudManager;
-    public AudioClip unlockSound;
     public ParticleSystem unlockParticles;
+    public AudioClip unlockSound;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
 
@@ -20,47 +21,44 @@ public class UnlockWaterButton : MonoBehaviour
     {
         ResourceManager rm = ResourceManager.Instance;
 
-        if (rm.waterUnlocked) {
-            Debug.Log("water unlocked!");
-            return;
-        }
+        if (rm.waterUnlocked) return;
+
         if (rm.SpendSunlight(cost))
         {
             rm.waterUnlocked = true;
             rm.waterBaseRate = 0.5f;
             hudManager.UnlockWaterUI();
 
-            // Haptics
-            var interactorMono = args.interactorObject as MonoBehaviour;
-            if (interactorMono != null)
-            {
-                var haptic = interactorMono.GetComponent<UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer>();
-                if (haptic != null) haptic.SendHapticImpulse(1.0f, 0.6f);
-            }
+            // Sound
+            if (unlockSound != null) AudioSource.PlayClipAtPoint(unlockSound, transform.position);
 
-            // Particles
-            if (unlockParticles != null) unlockParticles.Play();
+            // Particles — spawn a detached copy so it survives the disable
+            if (unlockParticles != null)
+                Instantiate(unlockParticles, transform.position, Quaternion.identity).Play();
 
+            // Disable walls
             GameObject[] walls = GameObject.FindGameObjectsWithTag("wall");
             foreach (GameObject wall in walls)
-            {
-                // Play spatialized shatter sound at each wall's position
-                if (unlockSound != null)
-                    AudioSource.PlayClipAtPoint(unlockSound, wall.transform.position);
-
                 wall.SetActive(false);
-            }
 
-            gameObject.SetActive(false);
+            // Disable interactable instead of whole GameObject
+            interactable.enabled = false;
+            StartCoroutine(DestroyAfterDelay(2f));
         }
         else
         {
             Debug.Log("Not enough sunlight!");
         }
+        IEnumerator DestroyAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            gameObject.SetActive(false); 
+        }
     }
 
     void OnDestroy()
     {
-        interactable.selectEntered.RemoveListener(OnPressed);
+        if (interactable != null)
+            interactable.selectEntered.RemoveListener(OnPressed);
     }
 }

@@ -73,7 +73,7 @@ public class BuyFlowerPlane : MonoBehaviour
             if (plantSound != null) AudioSource.PlayClipAtPoint(plantSound, transform.position);
 
             // Particles
-            if (plantParticles != null) plantParticles.Play();
+            if (plantParticles != null) Instantiate(plantParticles, new Vector3(transform.position.x, 0.28f, transform.position.z), Quaternion.identity).Play();
         }
         else
         {

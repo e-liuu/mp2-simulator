@@ -8,8 +8,8 @@ public class BuySuperPeanut : MonoBehaviour
     public float spinSpeed = 60f;
     public GameObject peanut;
     public GameObject window;
-    public AudioClip purchaseSound;
-    public ParticleSystem purchaseParticles;
+    public ParticleSystem buyParticles;
+    public AudioClip buySound;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
     private bool purchased = false;
@@ -23,59 +23,38 @@ public class BuySuperPeanut : MonoBehaviour
     void Update()
     {
         if (purchased && peanut != null)
-        {
             peanut.transform.Rotate(0, spinSpeed * Time.deltaTime, 0);
-        }
     }
 
     void OnBought(SelectEnterEventArgs args)
     {
-        if (purchased)
-            return;
+        if (purchased) return;
 
         ResourceManager rm = ResourceManager.Instance;
 
-        if (rm == null)
-        {
-            Debug.LogError("ResourceManager not found!");
-            return;
-        }
-
-        // Require water to be unlocked before super peanut
-        if (!rm.waterUnlocked)
-        {
-            Debug.Log("Water must be unlocked first!");
-            return;
-        }
+        if (rm == null) { Debug.LogError("ResourceManager not found!"); return; }
+        if (!rm.waterUnlocked) { Debug.Log("Water must be unlocked first!"); return; }
 
         if (rm.SpendSunlight(sunCost))
         {
             rm.waterMultiplier *= waterMultiplierIncrease;
-
             purchased = true;
 
-            // Ease in
-            if (peanut != null) peanut.AddComponent<ScaleEaseIn>();
-
-            // Sound
-            if (purchaseSound != null) AudioSource.PlayClipAtPoint(purchaseSound, transform.position);
-
-            // Particles
-            if (purchaseParticles != null) purchaseParticles.Play();
-
-            // Haptic feedback on the purchasing controller
+            // Haptics
             var interactorMono = args.interactorObject as MonoBehaviour;
             if (interactorMono != null)
             {
                 var haptic = interactorMono.GetComponent<UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer>();
-                if (haptic != null)
-                    haptic.SendHapticImpulse(0.8f, 0.4f);
+                if (haptic != null) haptic.SendHapticImpulse(0.8f, 0.4f);
             }
 
-            // Disable interaction so it can’t be bought twice
-            interactable.enabled = false;
+            // Particles
+            if (buyParticles != null) buyParticles.Play();
 
-            Debug.Log("Super Peanut purchased! Water production boosted.");
+            // Sound
+            if (buySound != null) AudioSource.PlayClipAtPoint(buySound, transform.position);
+
+            interactable.enabled = false;
             window.transform.position = new Vector3(0, -8f, 0);
         }
         else
