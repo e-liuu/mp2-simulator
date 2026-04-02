@@ -20,7 +20,7 @@ public class WaterParticleEffect : MonoBehaviour
 
         if (currentWhole > lastWhole)
         {
-            waterParticles.Emit((currentWhole - lastWhole)/2); // exactly 1 per unit
+            waterParticles.Emit(currentWhole - lastWhole); // exactly 1 per unit
         }
 
         lastWater = rm.water;
