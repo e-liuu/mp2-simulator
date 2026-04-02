@@ -11424,7 +11424,7 @@ MonoBehaviour:
   sunReq: 200
   waterReq: 120
   audioSource: {fileID: 309393051}
-  unlockSound: {fileID: 0}
+  unlockSound: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
   confettiPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa, type: 3}
   confettiSpawnPoint: {fileID: 0}
   popupTextObject: {fileID: 0}
@@ -12295,8 +12295,8 @@ MonoBehaviour:
   trophy: {fileID: 326299870}
   sunReq: 300
   waterReq: 200
-  audioSource: {fileID: 0}
-  unlockSound: {fileID: 0}
+  audioSource: {fileID: 377491613}
+  unlockSound: {fileID: 8300000, guid: 413a5fab3bba6064a9d77a12f659e465, type: 3}
   confettiPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa, type: 3}
   confettiSpawnPoint: {fileID: 0}
   popupTextObject: {fileID: 0}
