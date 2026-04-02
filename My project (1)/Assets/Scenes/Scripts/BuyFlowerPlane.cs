@@ -8,6 +8,10 @@ public class BuyFlowerPlane : MonoBehaviour
     public GameObject sunflowerPrefab;
     public TextMeshProUGUI costText;
 
+    //tutorial 
+    public TutorialPopup tutorialPopup;
+    private static bool firstFlowerTutorialShown = false;
+
     [Header("Row Detection")]
     // public float frontRowy = 0f;
     public float frontRowZ = 0f;
@@ -22,6 +26,11 @@ public class BuyFlowerPlane : MonoBehaviour
         // grabInteractable.selectEntered.AddListener(OnGrabbed);
         interactable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable>();
         interactable.selectEntered.AddListener(OnGrabbed);
+
+        if (tutorialPopup == null)
+        {
+            tutorialPopup = FindObjectOfType<TutorialPopup>();
+        }
         UpdateCostText();
     }
 
@@ -60,6 +69,15 @@ public class BuyFlowerPlane : MonoBehaviour
             GameObject sunflower = Instantiate(sunflowerPrefab, newpos, Quaternion.identity);
             sunflower.AddComponent<ScaleEaseIn>();
             StartCoroutine(SinkAndHide());
+            
+            // tutorial
+            if (!firstFlowerTutorialShown && tutorialPopup != null)
+            {
+                firstFlowerTutorialShown = true;
+                tutorialPopup.ShowTutorial(
+                    "Tutorial:\nFlowers generate sunlight over time.\nBuy more flowers to grow sunlight faster."
+                );
+            }
 
             // Haptics
             var interactorMono = args.interactorObject as MonoBehaviour;
